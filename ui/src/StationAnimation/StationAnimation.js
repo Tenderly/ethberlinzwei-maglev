@@ -9,36 +9,71 @@ import StationFront from './StationFront.svg';
 import './StationAnimation.scss'
 
 class StationAnimation extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            trains: [],
+        };
+    }
+
+    componentDidMount() {
+        const {batches} = this.props;
+
+        console.log(batches);
+
+        this.setState({
+            trains: batches.reduce((data, batch) => {
+                return data;
+            }, {}),
+        })
+    }
+
     render() {
+        const {batches} = this.props;
+
         return (
             <div className="StationAnimation">
                 <div className="Fade"/>
                 <div className="FrontLayer Layer">
-                    <img src={StationFront} alt="" className="StationFront"/>
+                    <img src={StationFront} alt="" className="StationFront" data-batches={batches.length}/>
                 </div>
                 <div className="MiddleLayer Layer">
-                    <div className="TrainTrack">
+                    {batches.length === 0 && <div className="TrainTrack">
+                        <div className="Rails NoAnim">
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                        </div>
+                    </div>}
+                    {batches.map(batch => <div className="TrainTrack" key={batch.id}>
                         <div className="Rails">
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
-                            <img src={Rails} alt="" className="Rail"/>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
+                            <div className="RailWrapper"><img src={Rails} alt="" className="Rail"/></div>
                         </div>
                         <div className="Train">
                             <img src={TrainFront} alt="" className="TrainFront"/>
-                            <img src={TrainWagon} alt="" className="TrainWagon"/>
-                            <img src={TrainWagon} alt="" className="TrainWagon"/>
-                            <img src={TrainWagon} alt="" className="TrainWagon"/>
+                            <div className="TrainWagonWrapper"><img src={TrainWagon} alt="" className="TrainWagon"/></div>
+                            <div className="TrainWagonWrapper"><img src={TrainWagon} alt="" className="TrainWagon"/></div>
+                            <div className="TrainWagonWrapper"><img src={TrainWagon} alt="" className="TrainWagon"/></div>
                         </div>
-                    </div>
+                    </div>)}
                 </div>
                 <div className="BackLayer Layer">
-                    <img src={StationBack} alt="" className="StationFront"/>
+                    <img src={StationBack} alt="" className="StationBack"/>
                 </div>
             </div>
         );

@@ -1,8 +1,47 @@
+@keyframes RailsEnter {
+  0% {
+    transform: rotate(-30deg) translateX(-350px) rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg) translateX(0px) rotate(30deg);
+  }
+}
+
+@keyframes TrainFrontEnter {
+  0% {
+    transform: rotate(-30deg) translateX(-350px) rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg) translateX(0px) rotate(30deg);
+  }
+}
+
+@keyframes TrainWagonEnter {
+  0% {
+    transform: rotate(-30deg) translateX(500px) rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg) translateX(0px) rotate(30deg);
+  }
+}
+
+@for $i from 1 through 8 {
+  @keyframes RailEnter#{$i} {
+    0% {
+      transform: rotate(-30deg) translateX(-50px * (9 - $i)) rotate(30deg);
+    }
+    100% {
+      transform: rotate(-30deg) translateX(0px) rotate(30deg);
+    }
+  }
+}
+
 .StationAnimation {
-  width: 500px;
+  width: 700px;
   height: 500px;
   overflow: hidden;
   position: relative;
+  margin: 50px auto;
 
   .Fade {
     position: absolute;
@@ -11,9 +50,10 @@
     top: 0;
     z-index: 500;
     left: 0;
-    box-shadow: 0 0 5px 3px red inset;
+    transform: rotate(45deg) scale(2.1);
+    box-shadow: 0 0 20px 100px #f6f6f6 inset;
+    //box-shadow: 0 0 20px 100px red inset;
     pointer-events: none;
-    opacity: 0;
   }
 
   .Layer {
@@ -26,36 +66,72 @@
 
   .FrontLayer {
     z-index: 300;
+  }
 
-    .StationFront {
-      position: absolute;
-      top: 150px;
-      left: 150px;
+  .StationBack {
+    position: absolute;
+    top: 79px;
+    left: 90px;
+  }
+
+  .StationFront {
+    position: absolute;
+    top: 185px;
+    left: 209px;
+    transition: 0.2s ease-out;
+    transform: rotate(30deg) translateX(0) rotate(-30deg);
+
+    &[data-batches="2"] {
+      transform: rotate(30deg) translateX(20px) rotate(-30deg);
     }
   }
 
   .TrainTrack {
     position: absolute;
-    top: 250px;
-    left: 50px;
+    top: 312px;
+    left: 90px;
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i + 1}) {
+        z-index: 190 - $i;
+        transform: rotate(30deg) translateX(26px * ($i)) rotate(-30deg);
+      }
+    }
   }
 
   .Rails {
     position: absolute;
     left: 0;
     top: 0;
+    animation: 1s RailsEnter ease-in;
 
-    .Rail {
+    .RailWrapper {
       position: absolute;
       z-index: 150;
       left: 0;
       top: 0;
+
+      @for $i from 1 through 8 {
+        &:nth-child(#{$i}) {animation: 1s RailEnter#{$i} ease-in}
+      }
+    }
+
+    .Rail {
+      position: relative;
     }
 
     @for $i from 1 through 10 {
-      .Rail:nth-child(#{$i + 1}) {
+      .RailWrapper:nth-child(#{$i + 1}) .Rail {
         z-index: 150 - $i;
         transform: rotate(-30deg) translateX(57px * ($i)) rotate(30deg);
+      }
+    }
+
+    &.NoAnim {
+      animation: initial !important;
+
+      .Rail, .RailWrapper {
+        animation: initial !important;
       }
     }
   }
@@ -69,26 +145,33 @@
   .MiddleLayer {
     z-index: 200;
 
-    .TrainFront {
-      z-index: 190;
-    }
-
-    .TrainWagon {
+    .TrainWagonWrapper {
       position: absolute;
       left: 0;
       top: 0;
+      z-index: 160;
+      animation: 1.5s 1.5s TrainWagonEnter cubic-bezier(0.215, 0.61, 0.355, 1) backwards;
+
+      .TrainWagon {
+        position: relative;
+      }
     }
 
     .TrainFront {
+      z-index: 180;
       position: absolute;
       left: -74.3px;
       top: 35.4px;
+      animation: 1s 1s TrainFrontEnter cubic-bezier(0.215, 0.61, 0.355, 1) backwards;
     }
 
     @for $i from 1 through 10 {
-      .TrainWagon:nth-child(#{$i}) {
-        z-index: 190 - $i;
-        transform: rotate(-30deg) translateX(71px * ($i - 2)) rotate(30deg);
+      .TrainWagonWrapper:nth-child(#{$i}) {
+        z-index: 160 - $i;
+
+        .TrainWagon {
+          transform: rotate(-30deg) translateX(71px * ($i - 2)) rotate(30deg);
+        }
       }
     }
   }

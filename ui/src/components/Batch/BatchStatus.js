@@ -12,7 +12,7 @@ const BatchStatus = ({batch}) => {
                 <span className="BlueText">Pending</span>
             </Fragment>}
             {batch.status === 'success' && <Fragment>
-                <CheckCircle size={14}/>
+                <CheckCircle color="#16ba43" size={18}/>
                 <span className="SuccessText">Success</span>
             </Fragment>}
         </div>

@@ -9,6 +9,9 @@ import './OverviewPage.scss';
 import StationAnimation from "../StationAnimation/StationAnimation";
 import GasGraphs from "../components/GasGraphs/GasGraphs";
 import GasMetrics from "../components/GasGraphs/GasMetrics";
+import {bindActionCreators} from "redux";
+
+import * as actions from '../core/actions';
 
 function mapStateToProps({app}) {
     return {
@@ -19,12 +22,26 @@ function mapStateToProps({app}) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    };
 }
 
 
 
 class OverviewPage extends Component {
+    handleAddBatch = (batchId) => {
+        const {actions} = this.props;
+
+        actions.addBatch(batchId);
+    };
+
+    handleFinishBatch = (batchId) => {
+        const {actions} = this.props;
+
+        actions.finishBatch(batchId);
+    };
+
     render() {
         const {currentBatches, finishedBatches, lastSync} = this.props;
 
@@ -37,7 +54,13 @@ class OverviewPage extends Component {
                         <GasMetrics/>
                     </div>
                     <div className="AnimationsWrapper">
-                        <StationAnimation/>
+                        <div>
+                            <button onClick={() => this.handleAddBatch('batch1')}>Add 1</button>
+                            <button onClick={() => this.handleFinishBatch('batch1')}>Finish 1</button>
+                            <button onClick={() => this.handleAddBatch('batch2')}>Add 2</button>
+                            <button onClick={() => this.handleFinishBatch('batch2')}>Finish 2</button>
+                        </div>
+                        <StationAnimation batches={currentBatches}/>
                         <GasGraphs/>
                     </div>
                 </div>
