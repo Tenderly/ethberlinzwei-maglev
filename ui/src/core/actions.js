@@ -58,6 +58,10 @@ export const setWorld = (data) => {
             }
         });
 
+        // const inProgressBatches = data.filter(d => !d.tx_hash);
+        //
+        // console.log(inProgressBatches);
+
         dispatch({
             type: UPDATE_WORLD,
             batches: world.batches,

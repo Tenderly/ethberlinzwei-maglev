@@ -104,6 +104,7 @@
     position: absolute;
     top: 312px;
     left: 90px;
+    z-index: 190;
 
     @for $i from 1 through 10 {
       &:nth-child(#{$i + 1}) {
