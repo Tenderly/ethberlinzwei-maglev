@@ -4,10 +4,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  flex: 0 0 auto;
 
   .LogoWrapper {
     display: flex;
