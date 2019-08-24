@@ -1,9 +1,18 @@
 import React from 'react';
 import Card from "../Card/Card";
+import classNames from 'classnames';
 
 import './GasMetrics.scss';
+import * as _ from "lodash";
+import BigNumber from "bignumber.js";
 
-const GasMetrics = () => {
+const GasMetrics = ({transactions, batches}) => {
+    const txAverage = _.meanBy(transactions, tx => tx.gas);
+
+    const batchAverage = _.meanBy(batches, b => b.totalGas);
+
+    const gasSavedPerc = new BigNumber(txAverage / 21000 * 100).toFixed(2);
+
     return (
         <div className="GasMetrics">
             <div className="MetricsRow">
@@ -16,7 +25,7 @@ const GasMetrics = () => {
                             2h 23min
                         </div>
                         <div className="MetricDescription">
-                            Based on previous 14 batches in the last 24h
+                            Based on the execution time of the previous {batches.length} batches.
                         </div>
                     </div>
                 </Card>
@@ -26,24 +35,26 @@ const GasMetrics = () => {
                     </div>
                     <div className="CardBody">
                         <div className="MetricNumber">
-                            210,000
+                            {new BigNumber(batchAverage).toFormat()}
                         </div>
                         <div className="MetricDescription">
-                            Based on previous 14 batches in the last 24h
+                            Based on the average gas cost of the previous {batches.length} batches.
                         </div>
                     </div>
                 </Card>
 
                 <Card>
                     <div className="CardHeading">
-                        <h3>Current Balance</h3>
+                        <h3>Avg. Tx Gas Cost</h3>
                     </div>
                     <div className="CardBody">
-                        <div className="MetricNumber">
-                            0.371294 ETH
+                        <div className={classNames(
+                            "MetricNumber"
+                        )}>
+                            {new BigNumber(txAverage).toFormat()}
                         </div>
                         <div className="MetricDescription">
-                            Base on average batch cost this will allow you to run <strong>5</strong> more batches.
+                            Based on the previous {transactions.length} transactions from {batches.length} batches.
                         </div>
                     </div>
                 </Card>
@@ -51,14 +62,20 @@ const GasMetrics = () => {
             <div className="MetricsRow">
                 <Card>
                     <div className="CardHeading">
-                        <h3>Avg. Batch Resolution</h3>
+                        <h3>Tx Gas Saved</h3>
                     </div>
                     <div className="CardBody">
-                        <div className="MetricNumber">
-                            2h 23min
+                        <div className={classNames(
+                            "MetricNumber",
+                            {
+                                'SuccessText': gasSavedPerc < 100,
+                                'DangerText': gasSavedPerc > 100,
+                            }
+                        )}>
+                            {gasSavedPerc}%
                         </div>
                         <div className="MetricDescription">
-                            Based on previous 14 batches in the last 24h
+                            How much a batched tx uses gas compared to the average tx gas used.
                         </div>
                     </div>
                 </Card>

@@ -3,3 +3,35 @@
   overflow-y: auto;
   flex: 1 1 0;
 }
+
+.PageHeading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+
+  .BackButton {
+    margin-right: 20px;
+    border-radius: 6px;
+    transition: 0.15s;
+    padding: 7px 10px 5px;
+
+    &:hover {
+      color: #3B77F4;
+      background-color: #e8e8e8;
+    }
+  }
+}
+
+.PageLoader {
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .LoaderText {
+    color: #333;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+}

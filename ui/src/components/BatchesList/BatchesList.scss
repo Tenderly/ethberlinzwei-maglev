@@ -19,3 +19,8 @@
     background-color: #f8f8f8;
   }
 }
+
+.BatchesListScroll {
+  overflow-y: auto;
+  max-height: 300px;
+}

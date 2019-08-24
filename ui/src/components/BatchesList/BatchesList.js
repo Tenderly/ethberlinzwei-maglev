@@ -18,7 +18,7 @@ const BatchesList = ({batches, label, synced}) => {
                     <RerenderableTime date={synced} format={date => date.fromNow()} className="SmallText"/>
                 </div>
             </div>
-            <div className="CardBody">
+            <div className="CardBody BatchesListScroll">
                 {batches.map(batch => {
                     return (
                         <Link to={`/batch/${batch.id}`} key={batch.id} className="BatchesList__Item">
@@ -27,7 +27,9 @@ const BatchesList = ({batches, label, synced}) => {
                                     <strong className="MonoText">{generateShortAddress(batch.id, 16, 6)}</strong>
                                 </div>
                                 <div className="SmallText">
+                                    Time to mine: <strong>
                                     <RerenderableTime date={batch.startedAt} format={(date, now) => humanizeDuration(moment.duration(now.diff(date, 'seconds'), 'seconds').asMilliseconds(), { largest: 2 })}/>
+                                </strong>
                                 </div>
                             </div>
                             <div className="OtherData">

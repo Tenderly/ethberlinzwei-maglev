@@ -31,15 +31,19 @@ export const setWorld = (data) => {
         const batches = data.filter(d => !!d.tx_hash);
 
         batches.forEach(b => {
+
             world.batches[b.tx_hash] = {
                 id: b.tx_hash,
                 status: !!b.block_number ? 'success' : 'pending',
-                transactions: !world.batches[b.tx_hash] ? 1 : world.batches[b.tx_hash].transactions + 1
+                transactions: !world.batches[b.tx_hash] ? 1 : world.batches[b.tx_hash].transactions + 1,
+                totalGas: !world.batches[b.tx_hash] ? b.gas : world.batches[b.tx_hash].totalGas + b.gas,
             };
 
             world.virtualTransactions[b.v_hash] = {
                 id: b.v_hash,
                 batchId: b.tx_hash,
+                gas: b.gas,
+                finished: !!b.block_number,
                 from: b.identity.toLowerCase(),
                 to: b.to.toLowerCase(),
             };
