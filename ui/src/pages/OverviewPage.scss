@@ -2,6 +2,11 @@
   display: flex;
 
   .BatchesWrapper {
-    flex: 0 0 500px;
+    flex: 0 0 650px;
+  }
+
+  .AnimationsWrapper {
+    flex: 1 1 0;
+    margin-left: 50px;
   }
 }

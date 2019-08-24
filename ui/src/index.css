@@ -44,6 +44,18 @@ code, .MonoText {
   color: #3B77F4;
 }
 
+.BlueText {
+  color: #3B77F4;
+}
+
+.SuccessText {
+  color: #D3F43B;
+}
+
+.DangerText {
+  color: #F45B3B;
+}
+
 h1, h2, h3, h4, h5 {
   margin: 0;
 }

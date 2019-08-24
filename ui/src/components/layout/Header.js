@@ -11,8 +11,9 @@ const Header = () => {
             <div className="LogoWrapper">
                 <img src={Logo} className="LogoImage" alt="Maglev Logo"/>
                 <div className="AppName">
-                    ETH Maglev
+                    Maglev
                 </div>
+                <div className="AppDesc">An Ethereum Tx Station</div>
             </div>
             <div className="ConnectionBar">
                 <CheckCircle size={16}/>

@@ -1,0 +1,23 @@
+.GasMetrics {
+  display: flex;
+
+  .Card {
+    &:nth-child(odd) {
+      margin-right: 30px;
+
+    }
+  }
+
+  .MetricNumber {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .MetricDescription {
+    color: #666;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 40px;
+  }
+}

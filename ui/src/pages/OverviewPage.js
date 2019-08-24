@@ -6,6 +6,9 @@ import Page from "../components/Page/Page";
 import {getFinishedBatches, getPendingBatches} from "../core/selectors";
 
 import './OverviewPage.scss';
+import StationAnimation from "../StationAnimation/StationAnimation";
+import GasGraphs from "../components/GasGraphs/GasGraphs";
+import GasMetrics from "../components/GasGraphs/GasMetrics";
 
 function mapStateToProps({app}) {
     return {
@@ -31,6 +34,11 @@ class OverviewPage extends Component {
                     <div className="BatchesWrapper">
                         <BatchesList synced={lastSync} label="Current Batches" batches={currentBatches}/>
                         <BatchesList synced={lastSync} label="Latest Batches" batches={finishedBatches}/>
+                        <GasMetrics/>
+                    </div>
+                    <div className="AnimationsWrapper">
+                        <StationAnimation/>
+                        <GasGraphs/>
                     </div>
                 </div>
             </Page>

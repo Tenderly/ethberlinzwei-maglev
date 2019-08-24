@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import './BatchesList.scss';
 import moment from "moment";
 import RerenderableTime from "../RerenderableTime/RerenderableTime";
+import BatchStatus from "../Batch/BatchStatus";
 
 const BatchesList = ({batches, label, synced}) => {
     return (
@@ -32,7 +33,7 @@ const BatchesList = ({batches, label, synced}) => {
                                     {batch.transactions} {batch.transactions === 1 ? 'Transaction' : 'Transactions'}
                                 </div>
                                 <div>
-                                    {batch.status}
+                                    <BatchStatus batch={batch}/>
                                 </div>
                             </div>
                         </div>
