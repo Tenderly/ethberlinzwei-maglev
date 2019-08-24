@@ -5133,6 +5133,11 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
+humanize-duration@^3.20.1:
+  version "3.20.1"
+  resolved "https://registry.yarnpkg.com/humanize-duration/-/humanize-duration-3.20.1.tgz#e5edf1edcd32ac1e97e71e0e97f02533f664dc45"
+  integrity sha512-r2FR5Tkwo482oDmoutbX22KLzmz83UlWD8KgfQuM+EvxxDS10m2tRgHsKU+M6nFxaDU72YCKmLKi3lYB0CPMnw==
+
 iconv-lite@0.4.23:
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"

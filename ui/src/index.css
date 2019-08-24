@@ -2,6 +2,7 @@ body, html, #root {
   background: #f6f6f6;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #333;
 }
 
 code, .MonoText {
@@ -26,7 +28,20 @@ code, .MonoText {
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
+}
+
+.MarginLeftAuto {
+  margin-left: auto;
+}
+
+.SmallText {
+  font-size: 12px;
+}
+
+.MonoText {
+  color: #3B77F4;
 }
 
 h1, h2, h3, h4, h5 {

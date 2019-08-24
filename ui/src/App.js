@@ -3,6 +3,7 @@ import {applyMiddleware, compose, createStore} from "redux";
 import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import {Route, BrowserRouter as Router} from "react-router-dom";
+import * as moment from "moment";
 
 import reducers from './core/reducer';
 import OverviewPage from "./pages/OverviewPage";
@@ -24,10 +25,8 @@ function App() {
         <Router>
             <div className="App">
                 <Header/>
-                <div className="PageContent">
-                    <Route path="/" exact component={OverviewPage}/>
-                    <Route path="/batch/:id" exact component={BatchPage}/>
-                </div>
+                <Route path="/" exact component={OverviewPage}/>
+                <Route path="/batch/:id" exact component={BatchPage}/>
             </div>
         </Router>
     </Provider>

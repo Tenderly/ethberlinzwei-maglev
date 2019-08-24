@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Card.scss';
 
-const Card = ({children}) => {
+const Card = ({children, className}) => {
     return (
         <div className="Card">
             {children}
