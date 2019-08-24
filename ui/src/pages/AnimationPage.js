@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getAllBatches, getPendingBatches} from "../core/selectors";
+import {getAllBatches} from "../core/selectors";
 import * as actions from "../core/actions";
 import StationAnimation from "../StationAnimation/StationAnimation";
 import Page from "../components/Page/Page";
