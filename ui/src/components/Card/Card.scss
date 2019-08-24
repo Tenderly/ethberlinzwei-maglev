@@ -3,6 +3,8 @@
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 6px 12px 16px -8px rgba(209, 209, 209, 0.75);
+  position: relative;
+  z-index: 1000;
 
   .CardHeading {
     position: relative;

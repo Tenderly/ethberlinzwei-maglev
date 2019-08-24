@@ -7,6 +7,7 @@ import moment from "moment";
 import RerenderableTime from "../RerenderableTime/RerenderableTime";
 import BatchStatus from "../Batch/BatchStatus";
 import {Link} from "react-router-dom";
+import {generateShortAddress} from "../../core/Ethereum";
 
 const BatchesList = ({batches, label, synced}) => {
     return (
@@ -23,7 +24,7 @@ const BatchesList = ({batches, label, synced}) => {
                         <Link to={`/batch/${batch.id}`} key={batch.id} className="BatchesList__Item">
                             <div>
                                 <div className="mb5">
-                                    <strong className="MonoText">{batch.id}</strong>
+                                    <strong className="MonoText">{generateShortAddress(batch.id, 16, 6)}</strong>
                                 </div>
                                 <div className="SmallText">
                                     <RerenderableTime date={batch.startedAt} format={(date, now) => humanizeDuration(moment.duration(now.diff(date, 'seconds'), 'seconds').asMilliseconds(), { largest: 2 })}/>
@@ -31,7 +32,7 @@ const BatchesList = ({batches, label, synced}) => {
                             </div>
                             <div className="OtherData">
                                 <div className="mb10">
-                                    <strong>{batch.transactions}</strong> tx in batch
+                                    <strong>{batch.transactions} tx</strong> in batch
                                 </div>
                                 <div>
                                     <BatchStatus batch={batch}/>

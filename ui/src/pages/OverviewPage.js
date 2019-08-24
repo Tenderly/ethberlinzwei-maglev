@@ -18,6 +18,7 @@ function mapStateToProps({app}) {
         currentBatches: getPendingBatches(app),
         finishedBatches: getFinishedBatches(app),
         lastSync: app.lastSync,
+        appLoaded: app.appLoaded,
     };
 }
 
@@ -43,7 +44,13 @@ class OverviewPage extends Component {
     };
 
     render() {
-        const {currentBatches, finishedBatches, lastSync} = this.props;
+        const {currentBatches, finishedBatches, lastSync, appLoaded} = this.props;
+
+        if (!appLoaded) {
+            return <Page>
+
+            </Page>
+        }
 
         return (
             <Page>
@@ -51,19 +58,10 @@ class OverviewPage extends Component {
                     <div className="BatchesWrapper">
                         <BatchesList synced={lastSync} label="Current Batches" batches={currentBatches}/>
                         <BatchesList synced={lastSync} label="Latest Batches" batches={finishedBatches}/>
-                        <GasMetrics/>
+                        <StationAnimation batches={currentBatches}/>
                     </div>
                     <div className="AnimationsWrapper">
-                        <div>
-                            <button onClick={() => this.handleAddBatch('batch1')}>Add 1</button>
-                            <button onClick={() => this.handleFinishBatch('batch1')}>Finish 1</button>
-                            <button onClick={() => this.handleAddBatch('batch2')}>Add 2</button>
-                            <button onClick={() => this.handleFinishBatch('batch2')}>Finish 2</button>
-                            <button onClick={() => this.handleAddBatch('batch3')}>Add 3</button>
-                            <button onClick={() => this.handleAddBatch('batch4')}>Add 4</button>
-                            <button onClick={() => this.handleAddBatch('batch5')}>Add 5</button>
-                        </div>
-                        <StationAnimation batches={currentBatches}/>
+                        <GasMetrics/>
                         <GasGraphs/>
                     </div>
                 </div>
