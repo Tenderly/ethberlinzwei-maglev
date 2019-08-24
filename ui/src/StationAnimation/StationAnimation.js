@@ -20,8 +20,6 @@ class StationAnimation extends Component {
     componentDidMount() {
         const {batches} = this.props;
 
-        console.log(batches);
-
         this.setState({
             trains: batches.reduce((data, batch) => {
                 return data;

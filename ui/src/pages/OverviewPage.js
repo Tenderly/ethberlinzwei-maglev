@@ -59,6 +59,9 @@ class OverviewPage extends Component {
                             <button onClick={() => this.handleFinishBatch('batch1')}>Finish 1</button>
                             <button onClick={() => this.handleAddBatch('batch2')}>Add 2</button>
                             <button onClick={() => this.handleFinishBatch('batch2')}>Finish 2</button>
+                            <button onClick={() => this.handleAddBatch('batch3')}>Add 3</button>
+                            <button onClick={() => this.handleAddBatch('batch4')}>Add 4</button>
+                            <button onClick={() => this.handleAddBatch('batch5')}>Add 5</button>
                         </div>
                         <StationAnimation batches={currentBatches}/>
                         <GasGraphs/>

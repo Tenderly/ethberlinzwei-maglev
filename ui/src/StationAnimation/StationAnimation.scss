@@ -81,8 +81,10 @@
     transition: 0.2s ease-out;
     transform: rotate(30deg) translateX(0) rotate(-30deg);
 
-    &[data-batches="2"] {
-      transform: rotate(30deg) translateX(20px) rotate(-30deg);
+    @for $i from 2 through 10 {
+      &[data-batches="#{$i}"] {
+        transform: rotate(30deg) translateX(26px * ($i - 1)) rotate(-30deg);
+      }
     }
   }
 
@@ -93,7 +95,7 @@
 
     @for $i from 1 through 10 {
       &:nth-child(#{$i + 1}) {
-        z-index: 190 - $i;
+        z-index: 190 + $i;
         transform: rotate(30deg) translateX(26px * ($i)) rotate(-30deg);
       }
     }
@@ -121,9 +123,12 @@
     }
 
     @for $i from 1 through 10 {
-      .RailWrapper:nth-child(#{$i + 1}) .Rail {
+      .RailWrapper:nth-child(#{$i + 1}) {
         z-index: 150 - $i;
-        transform: rotate(-30deg) translateX(57px * ($i)) rotate(30deg);
+
+        .Rail {
+          transform: rotate(-30deg) translateX(57px * ($i)) rotate(30deg);
+        }
       }
     }
 
