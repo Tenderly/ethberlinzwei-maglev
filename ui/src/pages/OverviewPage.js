@@ -12,6 +12,9 @@ import GasMetrics from "../components/GasGraphs/GasMetrics";
 import {bindActionCreators} from "redux";
 
 import * as actions from '../core/actions';
+import Loader from "../components/Loader/Loader";
+import moment from "moment";
+import RerenderableTime from "../components/RerenderableTime/RerenderableTime";
 
 function mapStateToProps({app}) {
     return {
@@ -48,7 +51,22 @@ class OverviewPage extends Component {
 
         if (!appLoaded) {
             return <Page>
+                <div className="OverviewLoader">
+                    <Loader/>
+                    <RerenderableTime className="LoaderText" date={lastSync} format={(date, now) => {
+                        const diff = now.diff(date, 'seconds');
 
+                        if (diff > 120) return 'One block at a time :)';
+
+                        if (diff > 90) return 'It\'s just a ether of time...';
+
+                        if (diff > 60) return 'We\'ve got our best engineer, Nebojsa, working on it!';
+
+                        if (diff > 30) return 'No worries, just a bit longer..';
+
+                        return '';
+                    }}/>
+                </div>
             </Page>
         }
 

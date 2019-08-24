@@ -27,9 +27,13 @@ class App extends Component {
     }
 
     startPolling = _.throttle(async () => {
-        const {data} = await axios.get('http://165.22.18.163:80/find');
+        try {
+            const {data} = await axios.get('http://165.22.18.163:80/find');
 
-        await store.dispatch(actions.setWorld(data));
+            await store.dispatch(actions.setWorld(data));
+        } catch (e) {
+            console.error(e);
+        }
 
         this.startPolling();
     }, 2000);

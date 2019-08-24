@@ -1,0 +1,53 @@
+@keyframes LoadingSpinnerAnimation {
+  0%   {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+$CircularLoaderSize: 150px;
+
+.CircularLoader {
+  .LoadingSpinner {
+    display: block;
+    position: relative;
+    width: $CircularLoaderSize;
+    height: $CircularLoaderSize;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #F4B83B;
+    animation: LoadingSpinnerAnimation 2s linear infinite;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: transparentize(#F4B83B, 0.4);
+      animation: LoadingSpinnerAnimation 3s linear infinite;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      border-top-color: transparentize(#F4B83B, 0.6);
+      animation: LoadingSpinnerAnimation 1.5s linear infinite;
+    }
+  }
+}

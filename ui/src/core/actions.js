@@ -30,8 +30,6 @@ export const setWorld = (data) => {
 
         const batches = data.filter(d => !!d.tx_hash);
 
-        console.log(world, batches);
-
         batches.forEach(b => {
             world.batches[b.tx_hash] = {
                 id: b.tx_hash,
