@@ -1,12 +1,19 @@
 .BatchesList__Item {
   display: flex;
-
   justify-content: space-between;
+  align-items: center;
   margin: 0 -20px;
-
   padding: 10px 20px;
   transition: 0.2s;
   cursor: pointer;
+  color: initial;
+  text-decoration: initial;
+
+  .OtherData {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 
   &:hover {
     background-color: #f8f8f8;

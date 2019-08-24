@@ -6,6 +6,7 @@ import './BatchesList.scss';
 import moment from "moment";
 import RerenderableTime from "../RerenderableTime/RerenderableTime";
 import BatchStatus from "../Batch/BatchStatus";
+import {Link} from "react-router-dom";
 
 const BatchesList = ({batches, label, synced}) => {
     return (
@@ -19,24 +20,24 @@ const BatchesList = ({batches, label, synced}) => {
             <div className="CardBody">
                 {batches.map(batch => {
                     return (
-                        <div key={batch.id} className="BatchesList__Item">
+                        <Link to={`/batch/${batch.id}`} key={batch.id} className="BatchesList__Item">
                             <div>
-                                <div>
+                                <div className="mb5">
                                     <strong className="MonoText">{batch.id}</strong>
                                 </div>
-                                <div>
+                                <div className="SmallText">
                                     <RerenderableTime date={batch.startedAt} format={(date, now) => humanizeDuration(moment.duration(now.diff(date, 'seconds'), 'seconds').asMilliseconds(), { largest: 2 })}/>
                                 </div>
                             </div>
-                            <div>
-                                <div>
-                                    {batch.transactions} {batch.transactions === 1 ? 'Transaction' : 'Transactions'}
+                            <div className="OtherData">
+                                <div className="mb10">
+                                    <strong>{batch.transactions}</strong> tx in batch
                                 </div>
                                 <div>
                                     <BatchStatus batch={batch}/>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 })}
             </div>

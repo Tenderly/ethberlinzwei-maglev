@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 
-import {CheckCircle} from 'react-feather';
+import {CheckCircle, PauseCircle} from 'react-feather';
 
 import './BatchStatus.scss';
 
@@ -8,11 +8,11 @@ const BatchStatus = ({batch}) => {
     return (
         <div className="BatchStatus">
             {batch.status === 'pending' && <Fragment>
-                <CheckCircle/>
+                <PauseCircle size={18} color="#3B77F4"/>
                 <span className="BlueText">Pending</span>
             </Fragment>}
             {batch.status === 'success' && <Fragment>
-                <CheckCircle/>
+                <CheckCircle size={14}/>
                 <span className="SuccessText">Success</span>
             </Fragment>}
         </div>

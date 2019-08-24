@@ -1,11 +1,13 @@
 .GasMetrics {
-  display: flex;
 
   .Card {
-    &:nth-child(odd) {
-      margin-right: 30px;
+    flex: 0 0 calc(50% - 10px);
+    width: calc(50% - 10px);
+  }
 
-    }
+  .MetricsRow {
+    display: flex;
+    justify-content: space-between;
   }
 
   .MetricNumber {
