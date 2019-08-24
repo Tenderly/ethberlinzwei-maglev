@@ -11,6 +11,8 @@ const GasMetrics = ({transactions, batches}) => {
 
     const batchAverage = _.meanBy(batches, b => b.totalGas);
 
+    const txPerBatchAverage = _.meanBy(batches, b => b.transactions);
+
     const gasSavedPerc = new BigNumber(txAverage / 21000 * 100).toFixed(2);
 
     return (
@@ -81,14 +83,14 @@ const GasMetrics = ({transactions, batches}) => {
                 </Card>
                 <Card>
                     <div className="CardHeading">
-                        <h3>Avg. Batch Gas Cost</h3>
+                        <h3>Avg. Tx per Batch</h3>
                     </div>
                     <div className="CardBody">
                         <div className="MetricNumber">
-                            210,000
+                            {txPerBatchAverage}
                         </div>
                         <div className="MetricDescription">
-                            Based on previous 14 batches in the last 24h
+                            Average transactions that are batched together based on the previous {batches.length} batches.
                         </div>
                     </div>
                 </Card>

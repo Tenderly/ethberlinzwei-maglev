@@ -7,63 +7,6 @@ import './GasGraphs.scss';
 import * as _ from "lodash";
 import BigNumber from "bignumber.js";
 
-const dummyData = [
-    {
-        batchId: 'asdqwe1231',
-        gasCost: 210000,
-        gasCostPerTx: 17433,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1232',
-        gasCost: 311230,
-        gasCostPerTx: 15302,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1233',
-        gasCost: 243000,
-        gasCostPerTx: 12439,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1234',
-        gasCost: 180000,
-        gasCostPerTx: 16000,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1235',
-        gasCost: 220000,
-        gasCostPerTx: 56000,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1236',
-        gasCost: 213000,
-        gasCostPerTx: 17000,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1237',
-        gasCost: 207000,
-        gasCostPerTx: 19000,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1238',
-        gasCost: 210000,
-        gasCostPerTx: 28000,
-        transactions: 234
-    },
-    {
-        batchId: 'asdqwe1239',
-        gasCost: 210000,
-        gasCostPerTx: 14000,
-        transactions: 234
-    },
-];
-
 class GasGraphs extends Component {
     render() {
         const {batches} = this.props;

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import BatchesList from "../components/BatchesList/BatchesList";
 import Page from "../components/Page/Page";
-import {getFinishedBatches, getFinishedTx, getPendingBatches} from "../core/selectors";
+import {getAllBatches, getFinishedBatches, getFinishedTx, getPendingBatches} from "../core/selectors";
 
 import './OverviewPage.scss';
 import StationAnimation from "../StationAnimation/StationAnimation";
@@ -19,6 +19,7 @@ function mapStateToProps({app}) {
     return {
         currentBatches: getPendingBatches(app),
         finishedBatches: getFinishedBatches(app),
+        allBatches: getAllBatches(app, 5),
         finishedTx: getFinishedTx(app),
         lastSync: app.lastSync,
         appLoaded: app.appLoaded,
@@ -34,20 +35,8 @@ function mapDispatchToProps(dispatch) {
 
 
 class OverviewPage extends Component {
-    handleAddBatch = (batchId) => {
-        const {actions} = this.props;
-
-        actions.addBatch(batchId);
-    };
-
-    handleFinishBatch = (batchId) => {
-        const {actions} = this.props;
-
-        actions.finishBatch(batchId);
-    };
-
     render() {
-        const {currentBatches, finishedBatches, finishedTx, lastSync, appLoaded} = this.props;
+        const {currentBatches, allBatches, finishedBatches, finishedTx, lastSync, appLoaded} = this.props;
 
         if (!appLoaded) {
             return <Page>
@@ -76,7 +65,7 @@ class OverviewPage extends Component {
                     <div className="BatchesWrapper">
                         <BatchesList synced={lastSync} label="Current Batches" batches={currentBatches}/>
                         <BatchesList synced={lastSync} label="Latest Batches" batches={finishedBatches}/>
-                        <StationAnimation batches={currentBatches}/>
+                        <StationAnimation batches={allBatches}/>
                     </div>
                     <div className="AnimationsWrapper">
                         <GasMetrics batches={finishedBatches} transactions={finishedTx}/>

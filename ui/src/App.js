@@ -11,6 +11,7 @@ import Header from "./components/layout/Header";
 import BatchPage from "./pages/BatchPage";
 import * as _ from "lodash";
 import * as actions from './core/actions';
+import AnimationPage from "./pages/AnimationPage";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -46,6 +47,7 @@ class App extends Component {
                         <Header/>
                         <Route path="/" exact component={OverviewPage}/>
                         <Route path="/batch/:id" exact component={BatchPage}/>
+                        <Route path="/animation" exact component={AnimationPage}/>
                     </div>
                 </Router>
             </Provider>

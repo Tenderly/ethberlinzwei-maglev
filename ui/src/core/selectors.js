@@ -1,3 +1,15 @@
+import * as _ from "lodash";
+
+export function getAllBatches(state, last) {
+    const batches = Object.values(state.batches);
+
+    if (last) {
+        return _.takeRight(batches, last);
+    }
+
+    return batches;
+}
+
 export function getPendingBatches(state) {
     const batches =  Object.values(state.batches).filter(b => b.status === 'pending');
 
