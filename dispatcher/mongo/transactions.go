@@ -27,7 +27,7 @@ func (ts *TransactionService) Insert(tx *types.Transaction) error {
 	return errors.Wrap(err, "insert transaction")
 }
 
-func (ts *TransactionService) Get() ([]*types.Transaction, error) {
+func (ts *TransactionService) Find() ([]*types.Transaction, error) {
 	cursor, err := ts.client.DB.Collection(Collection).Find(ts.ctx, bson.D{})
 	if err != nil {
 		return nil, errors.Wrap(err, "get transactions")

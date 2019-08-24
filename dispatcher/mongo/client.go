@@ -12,7 +12,7 @@ type Client struct {
 	DB *mongo.Database
 }
 
-func MustConfigute() *Client {
+func MustConfigure() *Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
 		panic(err)

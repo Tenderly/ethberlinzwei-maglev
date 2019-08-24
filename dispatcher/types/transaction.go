@@ -18,7 +18,7 @@ type Transaction struct {
 	To      string `json:"to" bson:"to"`
 	Value   uint64 `json:"value" bson:"value"`
 	Gas     uint64 `json:"gas" bson:"gas"`
-	Payload []byte `json:"payload" bson:"payload"`
+	Payload string `json:"payload" bson:"payload"`
 
 	TxHash      string `json:"tx_hash" bson:"tx_hash"`
 	BlockNumber uint64 `json:"block_number" bson:"block_number"`
@@ -28,5 +28,5 @@ type Transaction struct {
 
 type TransactionService interface {
 	Insert(tx *Transaction) error
-	Get() ([]*Transaction, error)
+	Find() ([]*Transaction, error)
 }
