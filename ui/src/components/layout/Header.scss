@@ -1,0 +1,41 @@
+.Header {
+  background: #F4B83B;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .LogoWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .LogoImage {
+    height: 36px;
+    margin-top: 5px;
+  }
+
+  .AppName {
+    font-weight: bold;
+    color: #222;
+    font-size: 20px;
+    margin-left: 20px;
+  }
+
+  .ConnectionBar {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.33);
+    padding: 8px 12px;
+    border-radius: 4px;
+
+    span {
+      margin-left: 8px;
+    }
+  }
+}

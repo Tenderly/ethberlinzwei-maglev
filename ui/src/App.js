@@ -8,8 +8,6 @@ import reducers from './core/reducer';
 import OverviewPage from "./pages/OverviewPage";
 import Header from "./components/layout/Header";
 
-import './App.css';
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
