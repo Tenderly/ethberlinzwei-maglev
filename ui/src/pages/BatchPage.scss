@@ -3,11 +3,29 @@
   justify-content: space-between;
 
   .BatchDetailsWrapper {
-    flex: 0 0 300px;
+    flex: 0 0 650px;
     margin-right: 30px;
   }
 
   .BatchTxWrapper {
     flex: 1 1 0;
+  }
+
+  .BatchInfoRow {
+    display: flex;
+    margin-bottom: 15px;
+
+    .InfoLabel {
+      font-weight: bold;
+      flex: 0 0 180px;
+    }
+
+    .MonoText {
+      text-decoration: initial;
+    }
+  }
+
+  .BatchTransactionsListItem {
+    margin-bottom: 20px;
   }
 }
