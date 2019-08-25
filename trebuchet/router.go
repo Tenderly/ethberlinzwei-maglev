@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/miljantekic/ethberlinzwei-maglev/dispatcher/route"
+	"github.com/miljantekic/ethberlinzwei-maglev/trebuchet/route"
 )
 
 func NewRouter(app *App) *httprouter.Router {

@@ -8,5 +8,5 @@ interface ERC725 {
     function changeOwner(address _owner) external;
     function getData(bytes32 _key) external view returns (bytes memory _value);
     function setData(bytes32 _key, bytes calldata _value) external;
-    function execute(uint256 _operationType, address _to, uint256 _value, bytes calldata _data) external;
+    function execute(bytes calldata _data) external;
 }

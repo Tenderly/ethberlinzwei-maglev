@@ -22,25 +22,6 @@ contract ProxyAccount is ERC725 {
         _;
     }
 
-    // function toAddress(bytes32 a) internal pure returns (address b){
-    //   assembly {
-    //         mstore(0, a)
-    //         b := mload(0)
-    //     }
-    //   return b;
-    // }
-
-    // function toBytes32(address a) internal pure returns (bytes32 b){
-    //   assembly {
-    //         mstore(0, a)
-    //         b := mload(0)
-    //     }
-    //   return b;
-    // }
-
-    // ----------------
-    // Public functions
-
     function () external payable {}
 
     function changeOwner(address _owner)
@@ -58,6 +39,14 @@ contract ProxyAccount is ERC725 {
     {
         return store[_key];
     }
+    
+    function getBalance()
+    external
+    view
+    returns (uint256 _value)
+    {
+        return address(this).balance;
+    }
 
     function setData(bytes32 _key, bytes calldata _value)
     external
@@ -67,42 +56,35 @@ contract ProxyAccount is ERC725 {
         emit DataChanged(_key, _value);
     }
 
-    function execute(uint256 _operationType, address _to, uint256 _value, bytes memory _data)
+    function execute(bytes memory _data)
     public
     onlyOwner
     {
-        if (_operationType == OPERATION_CALL) {
-            executeCall(_to, _value, _data);
-        } else if (_operationType == OPERATION_CREATE) {
-            address newContract = executeCreate(_data);
-            emit ContractCreated(newContract);
-        } else {
-            // We don't want to spend users gas if parametar is wrong
-            revert();
-        }
-    }
-
-    // copied from GnosisSafe
-    // https://github.com/gnosis/safe-contracts/blob/v0.0.2-alpha/contracts/base/Executor.sol
-    function executeCall(address to, uint256 value, bytes memory data)
-    internal
-    returns (bool success)
-    {
-        // solium-disable-next-line security/no-inline-assembly
         assembly {
-            success := call(gas, to, value, add(data, 0x20), mload(data), 0, 0)
-        }
-    }
+            if eq(shr(248, mload(add(_data, 32))), 0) {
+                pop(
+                    call(
+                        gas,
+                        shr(96, mload(add(_data, 33))),
+                        shr(160, mload(add(_data, 53))),
+                        add(_data, 65),
+                        sub(mload(_data), 33),
+                        0,
+                        0
+                    )
+                )
 
-    // copied from GnosisSafe
-    // https://github.com/gnosis/safe-contracts/blob/v0.0.2-alpha/contracts/base/Executor.sol
-    function executeCreate(bytes memory data)
-    internal
-    returns (address newContract)
-    {
-        // solium-disable-next-line security/no-inline-assembly
-        assembly {
-            newContract := create(0, add(data, 0x20), mload(data))
+                return(0, 0)
+            }
+            
+            pop(
+                create(
+                    0,
+                    add(_data, 0x21),
+                    mload(_data)
+                )
+            )
+            
         }
     }
 }

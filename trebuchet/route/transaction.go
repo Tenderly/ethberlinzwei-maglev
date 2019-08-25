@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/miljantekic/ethberlinzwei-maglev/dispatcher/route/helper"
-	"github.com/miljantekic/ethberlinzwei-maglev/dispatcher/types"
+	"github.com/miljantekic/ethberlinzwei-maglev/trebuchet/route/helper"
+	"github.com/miljantekic/ethberlinzwei-maglev/trebuchet/types"
 	"github.com/pkg/errors"
 )
 
@@ -23,7 +23,7 @@ func Insert(transactionService types.TransactionService) httprouter.Handle {
 			return
 		}
 
-		tx.VHash = "0x" + helper.RandStringRunes(32)
+		tx.VHash = "0x" + helper.RandStringRunes(64)
 
 		err = transactionService.Insert(&tx)
 		if err != nil {

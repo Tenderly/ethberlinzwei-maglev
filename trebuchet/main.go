@@ -1,13 +1,15 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/miljantekic/ethberlinzwei-maglev/dispatcher/mongo"
-	"github.com/miljantekic/ethberlinzwei-maglev/dispatcher/types"
+	"github.com/miljantekic/ethberlinzwei-maglev/trebuchet/mongo"
+	"github.com/miljantekic/ethberlinzwei-maglev/trebuchet/service"
+	"github.com/miljantekic/ethberlinzwei-maglev/trebuchet/types"
 	"github.com/rs/cors"
 )
 
@@ -45,6 +47,16 @@ func (app *App) Start() error {
 	go func() {
 		log.Printf("Listening on port %d...", 80)
 		errCh <- http.ListenAndServe(fmt.Sprintf(":%d", 80), handler)
+	}()
+
+	go func() {
+		batcher := service.NewBatcher(app.TransactionService)
+		errCh <- batcher.Start(context.Background())
+	}()
+
+	go func() {
+		inserter := service.NewInserter(app.TransactionService)
+		errCh <- inserter.Start(context.Background())
 	}()
 
 	return <-errCh
