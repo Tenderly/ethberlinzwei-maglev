@@ -39,16 +39,6 @@ const reducer = (state = initialState, action) => {
                 }
             };
         case UPDATE_WORLD:
-            console.log(action.batches);
-
-            _.forIn(action.batches, b => {
-                if (b.miningTime) {
-                    console.log(humanizeDuration(moment.duration(b.miningTime, 'seconds').asMilliseconds(), {
-                        largest: 2,
-                    }), moment.duration(b.miningTime, 'seconds').asMilliseconds());
-                }
-            });
-
             return {
                 ...state,
                 lastSync: moment(),
