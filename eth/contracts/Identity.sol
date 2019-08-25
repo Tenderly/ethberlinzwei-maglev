@@ -10,15 +10,29 @@ contract ProxyAccount is ERC725 {
 
     mapping(bytes32 => bytes) store;
 
+    address public realOwner;
     address public owner;
+    uint public until;
 
     constructor(address _owner) public {
         owner = _owner;
     }
 
+    modifier onlyRealOwner() {
+        require(msg.sender == realOwner, "only-owner-allowed");
+        _;
+    }
+
+    function changeRealOwner(address _owner)
+    external
+    onlyRealOwner
+    {
+        realOwner = _owner;
+        emit OwnerChanged(owner);
+    }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "only-owner-allowed");
+        require(msg.sender == owner && block.timestamp > until);
         _;
     }
 
@@ -26,9 +40,10 @@ contract ProxyAccount is ERC725 {
 
     function changeOwner(address _owner)
     external
-    onlyOwner
+    onlyRealOwner
     {
         owner = _owner;
+        until = block.timestamp + 300;
         emit OwnerChanged(owner);
     }
 
@@ -50,7 +65,7 @@ contract ProxyAccount is ERC725 {
 
     function setData(bytes32 _key, bytes calldata _value)
     external
-    onlyOwner
+    onlyRealOwner
     {
         store[_key] = _value;
         emit DataChanged(_key, _value);
