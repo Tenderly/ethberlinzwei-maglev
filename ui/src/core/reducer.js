@@ -1,6 +1,8 @@
 import {combineReducers} from "redux";
 import moment from "moment";
 import {ADD_BATCH, FINISH_BATCH, UPDATE_WORLD} from "./actions";
+import * as _ from "lodash";
+import humanizeDuration from "humanize-duration";
 
 const initialState = {
     batches: {},
@@ -44,6 +46,7 @@ const reducer = (state = initialState, action) => {
                 batches: action.batches,
                 virtualTransactions: action.virtualTransactions,
                 batchTransactions: action.batchTransactions,
+                batchingTransactions: action.batchingTransactions,
             };
         default:
             return state;

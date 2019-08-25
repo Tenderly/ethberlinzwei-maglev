@@ -12,6 +12,7 @@ import BatchPage from "./pages/BatchPage";
 import * as _ from "lodash";
 import * as actions from './core/actions';
 import AnimationPage from "./pages/AnimationPage";
+import moment from "moment";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,6 +26,9 @@ const store = createStore(
 class App extends Component {
     componentDidMount() {
         this.startPolling();
+        var x = 1566715508525364200, y= 1566715525757126100;
+
+        // console.log(moment(x/1000000).format("DD MMM YYYY hh:mm a"))
     }
 
     startPolling = _.throttle(async () => {

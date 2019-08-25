@@ -50,27 +50,27 @@ const BatchPage = ({batch, transactions, appLoaded, lastSync}) => {
                             <h3>Batch Information</h3>
                         </div>
                         <div className="CardBody">
-                            <div>
-                                <div>Tx Hash</div>
-                                <div>
-                                    <span className="MonoText">{batch.id}</span>
+                            <div className="BatchInfoRow">
+                                <div className="InfoLabel">Tx Hash</div>
+                                <div className="InfoValue TxInfo">
+                                    <a href={`https://rinkeby.etherscan.io/tx/${batch.id}`} className="MonoText" target="_blank">{generateShortAddress(batch.id, 18, 8)}</a>
                                 </div>
                             </div>
-                            <div>
-                                <div>Status</div>
-                                <div>
+                            <div className="BatchInfoRow">
+                                <div className="InfoLabel">Status</div>
+                                <div className="InfoValue">
                                     <BatchStatus batch={batch}/>
                                 </div>
                             </div>
-                            <div>
-                                <div>Gas</div>
-                                <div>
+                            <div className="BatchInfoRow">
+                                <div className="InfoLabel">Gas</div>
+                                <div className="InfoValue">
                                     {new BigNumber(batch.totalGas).toFormat(0)}
                                 </div>
                             </div>
-                            <div>
-                                <div>Avg. gas per tx</div>
-                                <div>
+                            <div className="BatchInfoRow">
+                                <div className="InfoLabel">Avg. gas per tx</div>
+                                <div className="InfoValue">
                                     {new BigNumber(batch.totalGas / batch.transactions).toFormat(0)}
                                 </div>
                             </div>
@@ -83,7 +83,7 @@ const BatchPage = ({batch, transactions, appLoaded, lastSync}) => {
                             <h3>Transactions</h3>
                         </div>
                         <div className="CardBody BatchTransactionsList">
-                            {transactions.map(tx => <div key={tx.id} className="BatchTransactionsList">
+                            {transactions.map(tx => <div key={tx.id} className="BatchTransactionsListItem">
                                 <div><strong>Virtual Hash:</strong> <span className="MonoText">{tx.id}</span></div>
                                 <div>{tx.from} to {tx.to}</div>
                                 <div><strong>Gas:</strong> {tx.gas} ({new BigNumber(tx.gas / batch.totalGas * 100).toFixed(2)}% of batch)</div>
