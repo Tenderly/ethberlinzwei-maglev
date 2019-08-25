@@ -15,7 +15,7 @@ class RerenderableTime extends Component {
             this.setState({
                 now: moment(),
             });
-        }, 3000);
+        }, 1000);
 
         this.setState({
             interval,

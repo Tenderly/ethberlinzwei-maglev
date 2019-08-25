@@ -21,6 +21,7 @@ function mapStateToProps({app}) {
         finishedBatches: getFinishedBatches(app),
         allBatches: getAllBatches(app, 5),
         finishedTx: getFinishedTx(app),
+        batchingTransactions: app.batchingTransactions,
         lastSync: app.lastSync,
         appLoaded: app.appLoaded,
     };
@@ -36,7 +37,7 @@ function mapDispatchToProps(dispatch) {
 
 class OverviewPage extends Component {
     render() {
-        const {currentBatches, allBatches, finishedBatches, finishedTx, lastSync, appLoaded} = this.props;
+        const {currentBatches, batchingTransactions, allBatches, finishedBatches, finishedTx, lastSync, appLoaded} = this.props;
 
         if (!appLoaded) {
             return <Page>
@@ -63,7 +64,7 @@ class OverviewPage extends Component {
             <Page>
                 <div className="OverviewPage">
                     <div className="BatchesWrapper">
-                        <BatchesList synced={lastSync} label="Current Batches" batches={currentBatches}/>
+                        <BatchesList synced={lastSync} label="Current Batches" batches={currentBatches} inProgress={batchingTransactions}/>
                         <BatchesList synced={lastSync} label="Latest Batches" batches={finishedBatches}/>
                         <StationAnimation batches={allBatches}/>
                     </div>

@@ -1,6 +1,8 @@
 import {combineReducers} from "redux";
 import moment from "moment";
 import {ADD_BATCH, FINISH_BATCH, UPDATE_WORLD} from "./actions";
+import * as _ from "lodash";
+import humanizeDuration from "humanize-duration";
 
 const initialState = {
     batches: {},
@@ -37,6 +39,16 @@ const reducer = (state = initialState, action) => {
                 }
             };
         case UPDATE_WORLD:
+            console.log(action.batches);
+
+            _.forIn(action.batches, b => {
+                if (b.miningTime) {
+                    console.log(humanizeDuration(moment.duration(b.miningTime, 'seconds').asMilliseconds(), {
+                        largest: 2,
+                    }), moment.duration(b.miningTime, 'seconds').asMilliseconds());
+                }
+            });
+
             return {
                 ...state,
                 lastSync: moment(),
@@ -44,6 +56,7 @@ const reducer = (state = initialState, action) => {
                 batches: action.batches,
                 virtualTransactions: action.virtualTransactions,
                 batchTransactions: action.batchTransactions,
+                batchingTransactions: action.batchingTransactions,
             };
         default:
             return state;

@@ -7,7 +7,9 @@ import * as _ from "lodash";
 import BigNumber from "bignumber.js";
 
 const GasMetrics = ({transactions, batches}) => {
-    const txAverage = _.meanBy(transactions, tx => tx.gas);
+    const txAverage = _.meanBy(transactions.filter(tx => tx.isMined), tx => tx.gas);
+
+    const averageDuration = _.meanBy(batches, b => b.miningTime);
 
     const batchAverage = _.meanBy(batches, b => b.totalGas);
 
@@ -24,7 +26,7 @@ const GasMetrics = ({transactions, batches}) => {
                     </div>
                     <div className="CardBody">
                         <div className="MetricNumber">
-                            2h 23min
+                            {new BigNumber(averageDuration).decimalPlaces(1).toFormat()}s
                         </div>
                         <div className="MetricDescription">
                             Based on the execution time of the previous {batches.length} batches.
@@ -37,7 +39,7 @@ const GasMetrics = ({transactions, batches}) => {
                     </div>
                     <div className="CardBody">
                         <div className="MetricNumber">
-                            {new BigNumber(batchAverage).toFormat()}
+                            {new BigNumber(batchAverage).decimalPlaces(2).toFormat()}
                         </div>
                         <div className="MetricDescription">
                             Based on the average gas cost of the previous {batches.length} batches.
@@ -53,7 +55,7 @@ const GasMetrics = ({transactions, batches}) => {
                         <div className={classNames(
                             "MetricNumber"
                         )}>
-                            {new BigNumber(txAverage).toFormat()}
+                            {new BigNumber(txAverage).decimalPlaces(2).toFormat()}
                         </div>
                         <div className="MetricDescription">
                             Based on the previous {transactions.length} transactions from {batches.length} batches.
