@@ -8,7 +8,7 @@ We call it the Tx Station, as it puts all transactions on the same train and sen
 
 It was originally developed on the ETHBerlinzwei 2019 Hackathon by members of [Tenderly](https://tenderly.co). 
 
-Check us out on [DevPost](https://devpost.com)!
+Check us out on [DevPost](https://devpost.com/software/maglev-ethereum-tx-station)!
 
 
 
